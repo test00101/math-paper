@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { get } from '../utils/http';
+import { httpGet } from '../utils/http';
 
 const useFetchData = (initialUrl: string, initialData: any): any => {
   const [data, setData] = useState(initialData);
@@ -13,7 +13,7 @@ const useFetchData = (initialUrl: string, initialData: any): any => {
       setIsLoading(true);
 
       try {
-        const result = (await get(url)) as any;
+        const result = (await httpGet(url)) as any;
 
         setData(result.data);
       } catch (error) {

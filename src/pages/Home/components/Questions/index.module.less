@@ -1,0 +1,77 @@
+.questionsWrap {
+  margin-top: 15px;
+
+  .questionItemWrap {
+    width: 100%;
+    min-height: 20px;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+    text-align: left;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: relative;
+    transition-property: box-shadow;
+    transition-duration: .3s;
+    transition-timing-function: ease-in;
+    background-color: #fff;
+
+    &:hover {
+      box-shadow: 0 0 9px 0 rgb(0 0 0 / 20%);
+      border-radius: 2px;
+    }
+
+    .questionItemHeader {
+      color: #666666;
+      height: 42px;
+      line-height: 42px;
+      border-bottom: 1px solid #f4f9ff;
+      box-sizing: border-box;
+      padding: 0 14px;
+      display: flex;
+      justify-content: space-between;
+
+      .editBtn, .deleteBtn {
+        color: #1890ff;
+        cursor: pointer;
+        margin-left: 15px;
+      }
+
+      .addToPaper {
+        color: #1890ff;
+        cursor: pointer;
+      }
+    }
+
+    .questionContent {
+      padding: 14px 14px;
+    }
+
+    .questionItemFooter {
+      color: #666666;
+      height: 42px;
+      line-height: 42px;
+      border-top: 1px solid #f4f9ff;
+      box-sizing: border-box;
+      padding: 0 14px;
+      display: flex;
+      justify-content: space-between;
+
+      .addToPaper {
+        color: #1890ff;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+
+.editorModal {
+  .editItem {
+    margin: 0 0 20px 0;
+    font-weight: 500;
+  }
+}
+
+

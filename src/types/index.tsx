@@ -12,9 +12,5 @@ export interface ChildNodeType {
  * 题目内容
  * */
 export interface QuestionType {
-  id: number;
-  title: string;
-  desc: string;
-  content: string;
-  answer: string;
+  questionId: number;
 }

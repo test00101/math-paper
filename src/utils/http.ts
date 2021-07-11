@@ -61,7 +61,7 @@ axios.interceptors.response.use(
   }
 );
 
-export function get(url: string, params?: any) {
+export function httpGet(url: string, params?: any) {
   return new Promise((resolve, reject) => {
     axios
       .get(url, { params: params })
@@ -74,10 +74,23 @@ export function get(url: string, params?: any) {
   });
 }
 
-export function post(url: string, params: any) {
+export function httpPost(url: string, params?: any) {
   return new Promise((resolve, reject) => {
     axios
       .post(url, params)
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+export function httpDelete(url: string, params?: any) {
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(url, params)
       .then((res) => {
         resolve(res);
       })

@@ -7,22 +7,32 @@ import { useFetchData } from '../../hooks';
 
 import styles from './index.module.less';
 
-const defaultUrl = '/knowledgeCategory';
-
 const Home = () => {
-  const [{ data: knowledgeCategories, isLoading: isMenuLoading, isError: isMenuError }, setUrl] = useFetchData(
-    defaultUrl,
+  /**
+   * 知识点类型
+   * */
+  const [{ data: knowledgeCategories, isLoading: isMenuLoading, isError: isMenuError }] = useFetchData(
+    '/knowledgeCategory',
     {}
   );
+
+  /**
+   * 试题类型（选择题、填空题、解答题等）
+   * */
+  const [{ data: questiontype, isLoading: isQuestionTypeLoading, isError: isQuestionTypeError }] = useFetchData(
+    '/questiontype',
+    {}
+  );
+
   const [menuNode, setMenuNode] = useState<{ title: string; id: number }>({ id: 0, title: '' });
 
   // 请求失败的错误提示
-  if (isMenuError) {
+  if (isMenuError || isQuestionTypeError) {
     return <Result status={500} title="错误" subTitle="抱歉，发生了一些错误" />;
   }
 
   // 请求数据返回时的 loading
-  if (isMenuLoading) {
+  if (isMenuLoading || isQuestionTypeLoading) {
     return (
       <div className={styles.loadingWrap}>
         <Spin />
@@ -44,7 +54,7 @@ const Home = () => {
         </div>
 
         <div className={styles.rightContent}>
-          <Content data={knowledgeCategories} menuNode={menuNode} />
+          <Content knowledgeCategory={menuNode.id} questiontype={questiontype} />
         </div>
       </div>
     </div>

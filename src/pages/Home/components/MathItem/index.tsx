@@ -1,15 +1,13 @@
 import React from 'react';
-import { Collapse } from 'antd';
+import MathJax from 'react-mathjax2';
 import { QuestionType } from '../../../../types';
 import styles from './index.module.less';
 
-const { Panel } = Collapse;
-
 interface MathItemProps {
-  item: QuestionType;
+  mathData: any;
 }
 
-const MathItem = ({ item }: MathItemProps): React.ReactElement => {
+const MathItem = ({ mathData }: MathItemProps): React.ReactElement => {
   const handleEdit = (item: QuestionType) => {
     console.log(item);
   };
@@ -25,8 +23,27 @@ const MathItem = ({ item }: MathItemProps): React.ReactElement => {
 `;
 
   return (
-    <section key={item.id} className={styles.itemWrap}>
-      mathItem
+    <section key={mathData.questionId} className={styles.itemWrap}>
+      <p className={styles.questionDescription}>描述：</p>
+      <MathJax.Context
+        input="ascii"
+        onLoad={() => console.log('Loaded MathJax script!')}
+        onError={(MathJax: any, error: any) => {
+          console.warn(error);
+          console.log('Encountered a MathJax error, re-attempting a typeset!');
+          MathJax.Hub.Queue(MathJax.Hub.Typeset());
+        }}
+        script="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=AM_HTMLorMML"
+        options={{
+          asciimath2jax: {
+            useMathMLspacing: true,
+            delimiters: [['$$', '$$']],
+            preview: 'none',
+          },
+        }}>
+        <MathJax.Text text={mathData.description} />
+      </MathJax.Context>
+      <p className={styles.questionAnswers}>答案：</p>
     </section>
   );
 };
